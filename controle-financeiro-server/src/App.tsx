@@ -8,7 +8,6 @@ import { Form } from './components/Form'
 import Axios from 'axios'
 
 export function App() {
-
   // entrada
   const [valueIncome, setValueIncome] = useState<number>(0)
   const [income, setIncome] = useState<string>('0')
@@ -16,7 +15,6 @@ export function App() {
   const [valueExit, setValueExit] = useState<number>(0)
   const [expense, setExpense] = useState<string>('0')
   // total
-  const [valuetotal, setValueTotal] = useState<number>(0)
   const [total, setTotal] = useState<string>('0')
 
   useEffect(() => {
