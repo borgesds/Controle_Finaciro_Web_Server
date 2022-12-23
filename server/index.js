@@ -28,9 +28,31 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.get('/getcards', (req, res) => {
+app.get('/getdata', (req, res) => {
 
     let SQL = "SELECT * FROM financa"
+
+    db.query(SQL, (err, result) => {
+        if (err) console.log(err)
+        else res.send(result)
+    })
+})
+
+// entrada - income
+app.get('/getincome', (req, res) => {
+
+    let SQL = "SELECT sum(f.valor) as 'valor' FROM financa f WHERE f.saida_entrada = 1"
+
+    db.query(SQL, (err, result) => {
+        if (err) console.log(err)
+        else res.send(result)
+    })
+})
+
+// saida - exit
+app.get('/getexit', (req, res) => {
+
+    let SQL = "SELECT sum(f.valor) as 'valor' FROM financa f WHERE f.saida_entrada = 0"
 
     db.query(SQL, (err, result) => {
         if (err) console.log(err)

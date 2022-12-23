@@ -7,9 +7,9 @@ import {
 } from 'react-icons/fa'
 
 interface ValuesResume {
-  income: number
-  expense: number
-  total: number
+  income: string
+  expense: string
+  total: string
 }
 
 export function Resume({ income, expense, total }: ValuesResume) {

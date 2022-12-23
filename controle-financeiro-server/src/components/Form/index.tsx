@@ -34,6 +34,9 @@ export function Form() {
     } else if (values.amount < 1) {
       alert('O valor tem que ser positivo!!!')
       return
+    } else if (!values.radioclick) {
+      alert('Escolha: Entrada ou Saída!!!')
+      return
     }
 
     Axios.post('http://localhost:3000/register', {
@@ -45,20 +48,12 @@ export function Form() {
       console.log(response)
     })
 
-    /* setValues({
-      desc: '',
-      amount: 0,
-      datetime: '',
-      entrada: 0,
-      saida: 0,
-    }) */
-
     document.location.reload()
   }
 
   // pegando os dados do banco de dados
   useEffect(() => {
-    Axios.get('http://localhost:3000/getcards').then((response) => {
+    Axios.get('http://localhost:3000/getdata').then((response) => {
       setTransactionsList(response.data)
     })
   }, [])

@@ -5,50 +5,53 @@ import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 import { useState, useEffect } from 'react'
 import { Form } from './components/Form'
+import Axios from 'axios'
 
 export function App() {
-  /*   const data = localStorage.getItem('transactions')
-  const [transactionsList, setTransactionsList] = useState(
-    data ? JSON.parse(data) : [],
-  ) */
 
   // entrada
-  const [income, setIncome] = useState<number>(0)
+  const [valueIncome, setValueIncome] = useState<number>(0)
+  const [income, setIncome] = useState<string>('0')
   // saídas
-  const [expense, setExpense] = useState<number>(0)
+  const [valueExit, setValueExit] = useState<number>(0)
+  const [expense, setExpense] = useState<string>('0')
   // total
-  const [total, setTotal] = useState<number>(0)
+  const [valuetotal, setValueTotal] = useState<number>(0)
+  const [total, setTotal] = useState<string>('0')
 
-  /*   useEffect(() => {
-    const amountExpense = transactionsList
-      .filter((item: any) => item.expense)
-      .map((transaction: number) => Number(transaction.amount))
+  useEffect(() => {
+    Axios.get('http://localhost:3000/getincome').then((response) => {
+      const arr: any = response.data.map(function (obj: any) {
+        return Object.keys(obj).map(function (key) {
+          return obj[key]
+        })
+      })
 
-    const amountIncome = transactionsList
-      .filter((item: any) => !item.expense)
-      .map((transaction: number) => Number(transaction.amount))
+      setValueIncome(Number(arr[0][0]))
 
-    const expense = amountExpense
-      .reduce((acc: number, cur: number) => acc + cur, 0)
-      .toFixed(2)
-    const income = amountIncome
-      .reduce((acc: number, cur: number) => acc + cur, 0)
-      .toFixed(2)
+      const valueIncomeExhibition: string = `R$ ${valueIncome.toFixed(2)}`
+      setIncome(valueIncomeExhibition)
+    })
 
-    const total = Math.abs(income - expense).toFixed(2)
+    Axios.get('http://localhost:3000/getexit').then((response) => {
+      const arr: any = response.data.map(function (obj: any) {
+        return Object.keys(obj).map(function (key) {
+          return obj[key]
+        })
+      })
 
-    setIncome(`R$ ${income}`)
-    setExpense(`R$ ${expense}`)
-    setTotal(`${Number(income) < Number(expense) ? '-' : ''} R$ ${total}`)
-  }, [transactionsList]) */
+      setValueExit(Number(arr[0][0]))
 
-  /*   const handleAdd = (transaction: string | number | boolean) => {
-    const newArrayTransactions = [...transactionsList, transaction]
+      const valueExitExhibition: string = `R$ ${valueExit.toFixed(2)}`
+      setExpense(valueExitExhibition)
+    })
 
-    setTransactionsList(newArrayTransactions)
+    const varTotal = valueIncome - valueExit
+    console.log(varTotal)
 
-    localStorage.setItem('transactions', JSON.stringify(newArrayTransactions))
-  } */
+    setTotal(`${varTotal < 0 ? '-' : ''} R$ ${varTotal.toFixed(2)}`)
+  }, [valueExit, valueIncome])
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Header />
