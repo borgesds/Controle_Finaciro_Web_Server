@@ -6,7 +6,7 @@ Foi usado Nodejs para faz conexão com API, para conectar usou Axios e o banco d
 
 <h3> Ferramentas </h3>
 
- - React, Typescript, Javascript, HTML, CSS, Nodejs, Axios
+ - React, Typescript, Javascript, HTML, CSS, Nodejs, Axios e Mysql
  
  - Estou trabalhando em meus projetos com Typescript, estou em aprendizado constante então algumas tipagens vai receber any como padrão, mas os próximos  projetos tenho certeza que estarei mais evoluído.
 
